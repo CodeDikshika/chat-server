@@ -1,0 +1,7 @@
+MONGO_URI = mongodb+srv://chattuchatu:DnjUGnr62u@cluster0.x7m9qp2.mongodb.net/
+JWT_SECRET= JaiBajrangBali
+ADMIN_SECRET_KEY= JaiBajrangBali
+NODE_ENV = DEVELOPMENT
+CLOUDINARY_CLOUD_NAME=
+CLOUDINARY_API_KEY = 
+CLOUDINARY_API_SECRET = 
