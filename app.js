@@ -30,6 +30,10 @@ app.set("io",io);
 app.use(express.json());
 app.use(cookieParser());
 app.use(cors(corsOptions));
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
 
 const mongoURI = process.env.MONGO_URI;
 const port = 3000 || process.env.PORT;
