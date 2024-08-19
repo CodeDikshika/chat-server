@@ -36,9 +36,9 @@ app.use(function(req, res, next) {
 });
 
 const mongoURI = process.env.MONGO_URI;
-const port = 3000 || process.env.PORT;
+const port = process.env.PORT || 3000;
 
-const envMode = process.env.NODE_ENV.trim() || "PRODUCTION";
+const envMode = process.env.NODE_ENV?.trim() || "PRODUCTION";
 const adminSecretKey = process.env.ADMIN_SECRET_KEY || "adsasdsdfsdfsdfd";
 const userSocketIDs = new Map();
 const onlineUsers = new Set();
@@ -59,11 +59,10 @@ app.get("/", (req, res) => {
   res.send("hello world");
 });
 io.use((socket, next) => {
-  cookieParser()(
-    socket.request,
-    socket.request.res,
-    async (err) => await socketAuthenticator(err, socket, next)
-  );
+  cookieParser()(socket.request, socket.request.res, (err) => {
+    if (err) return next(err);
+    socketAuthenticator(null, socket, next);
+  });
 });
 
 io.on("connection", (socket) => {
